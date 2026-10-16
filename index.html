@@ -29,4 +29,53 @@ input{width:85%;padding:13px;border-radius:10px;border:1px solid #0f0;background
 </div>
 
 <div id="loginBox" class="box" style="padding-top:80px">
-<h1>LOGIN</h1><input id="lu" placeholder="Username"><input type="password" placeholder="Password"><button class
+<h1>LOGIN</h1><input id="lu" placeholder="Username"><input type="password" placeholder="Password"><button class="btn" onclick="s('home')">ENTER GHOST</button><span class="create" onclick="s('welcome')">Back</span>
+</div>
+
+<div id="createBox" class="box" style="padding-top:60px">
+<h1 style="font-size:28px">CREATE ACCOUNT</h1><input placeholder="Username"><input placeholder="Email"><input type="password" placeholder="Password"><button class="btn" onclick="s('home')">CREATE & ENTER</button><span class="create" onclick="s('welcome')">Already have account? Login</span>
+</div>
+
+<div id="home">
+<h1 style="font-size:26px;padding:15px">👻 GHOST DATING</h1>
+<div class="profiles">
+<div class="card" onclick="openChat('Sophia, 22')"><div style="font-size:50px">👩‍🦰</div><b>Sophia, 22</b><br><small>Online</small></div>
+<div class="card" onclick="openChat('David, 24')"><div style="font-size:50px">👨‍🦱</div><b>David, 24</b><br><small>Ghost mode</small></div>
+<div class="card" onclick="openChat('Amara, 21')"><div style="font-size:50px">👩🏾</div><b>Amara, 21</b><br><small>Lagos</small></div>
+<div class="card" onclick="openChat('Tunde, 25')"><div style="font-size:50px">👦</div><b>Tunde, 25</b><br><small>Near you</small></div>
+</div>
+<button class="btn" style="margin-top:15px" onclick="openChat('Secret Crush')">+ SEND INVISIBLE MESSAGE 👻</button>
+</div>
+
+<div id="chat" class="box" style="padding-top:50px">
+<h1 id="chatName" style="font-size:22px"></h1>
+<textarea id="t" style="width:85%;height:90px;background:#111;border:1px solid #0f0;color:#0f0;padding:12px;border-radius:10px" placeholder="Type secret ghost message... it will vanish!"></textarea><br>
+<button class="btn" onclick="g()">SEND INVISIBLE 👻</button>
+<div id="result" style="margin-top:15px;display:none;background:#111;padding:10px;border-radius:10px;word-break:break-all"></div>
+<span class="create" onclick="s('home')">Back to profiles</span>
+</div>
+
+<script>
+function s(id){['welcome','loginBox','createBox','home','chat'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display=id==='welcome'?'flex':'block';if(id==='welcome'){document.getElementById(id).style.flexDirection='column';document.getElementById(id).style.height='100vh';document.getElementById(id).style.justifyContent='space-between';}}
+function openChat(name){s('chat');document.getElementById('chatName').innerText=name;}
+function g(){
+let x=document.getElementById('t').value;if(!x)return alert('Type secret message');
+let c=btoa(unescape(encodeURIComponent(x)));
+let l=location.origin+location.pathname+'#'+c;
+let r=document.getElementById('result');r.style.display='block';
+r.innerHTML='<p>Ghost link ready! Send to '+document.getElementById('chatName').innerText+':</p><input id="li" style="width:90%;padding:10px;border-radius:5px" value="'+l+'"><br><button onclick="copy()" style="margin-top:10px;padding:10px;background:#0f0;border:none;border-radius:5px;font-weight:bold">COPY LINK</button><p style="font-size:11px;color:#888">Message vanishes after reading!</p>';
+}
+function copy(){let i=document.getElementById('li');i.select();document.execCommand('copy');alert('Ghost link copied! 👻');}
+if(location.hash.length>1){
+['welcome','loginBox','createBox','home'].forEach(x=>document.getElementById(x).style.display='none');
+document.getElementById('chat').style.display='block';
+let m=decodeURIComponent(escape(atob(location.hash.slice(1))));
+document.getElementById('chatName').innerText='👻 Secret Ghost Message';
+document.getElementById('t').style.display='none';
+let r=document.getElementById('result');r.style.display='block';
+r.innerHTML='<div style="font-size:22px;padding:20px;border:1px solid #0f0;border-radius:10px">'+m+'</div><p style="font-size:12px;color:#888">Vanishes in 5 sec...</p>';
+setTimeout(()=>{r.innerHTML='👻 VANISHED FOREVER';history.replaceState(null,'',location.pathname)},5000);
+}
+</script>
+</body>
+</html>
