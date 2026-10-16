@@ -2,192 +2,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GHOST Dating</title>
-<style>
-body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;text-align:center}
-.top{padding:30px 0 10px}
-h1{color:#7CFF6B;font-size:38px;font-weight:900;text-shadow:0 0 20px #0f0;margin:0}
-.boy{height:45vh;display:flex;align-items:center;justify-content:center;font-size:90px;filter:drop-shadow(0 0 20px #0f0)}
-.btn{background:#7CFF6B;color:#000;border:none;width:85%;padding:16px;border-radius:30px;font-weight:900;font-size:18px;cursor:pointer;margin:8px}
-.create{color:#aaa;font-size:14px;text-decoration:underline;cursor:pointer;display:block;margin-top:10px}
-.box{padding:20px}
-input{width:85%;padding:13px;border-radius:10px;border:1px solid #0f0;background:#111;color:#0f0;margin:6px}
-.profiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#111;border:1px solid #222;border-radius:15px;padding:10px;cursor:pointer}
-.card img{width:100%;border-radius:10px}
-.card b{color:#7CFF6B}
-#welcome,#loginBox,#createBox,#home,#chat{display:none}
-#welcome{display:flex;flex-direction:column;height:100vh;justify-content:space-between}
-</style>
-</head>
-<body>
-
-<div id="welcome">
-<div class="top"><h1>WELCOME TO<br>GHOST</h1><p style="color:#666;font-size:12px">Where secrets vanish...</p></div>
-<div class="boy">👦👻</div>
-<div class="box"><button class="btn" onclick="s('loginBox')">LOGIN</button><span class="create" onclick="s('createBox')">Create a new account</span></div>
-</div>
-
-<div id="loginBox" class="box" style="padding-top:80px">
-<h1>LOGIN</h1><input id="lu" placeholder="Username"><input type="password" placeholder="Password"><button class="btn" onclick="s('home')">ENTER GHOST</button><span class="create" onclick="s('welcome')">Back</span>
-</div>
-
-<div id="createBox" class="box" style="padding-top:60px">
-<h1 style="font-size:28px">CREATE ACCOUNT</h1><input placeholder="Username"><input placeholder="Email"><input type="password" placeholder="Password"><button class="btn" onclick="s('home')">CREATE & ENTER</button><span class="create" onclick="s('welcome')">Already have account? Login</span>
-</div>
-
-<div id="home">
-<h1 style="font-size:26px;padding:15px">👻 GHOST DATING</h1>
-<div class="profiles">
-<div class="card" onclick="openChat('Sophia, 22')"><div style="font-size:50px">👩‍🦰</div><b>Sophia, 22</b><br><small>Online</small></div>
-<div class="card" onclick="openChat('David, 24')"><div style="font-size:50px">👨‍🦱</div><b>David, 24</b><br><small>Ghost mode</small></div>
-<div class="card" onclick="openChat('Amara, 21')"><div style="font-size:50px">👩🏾</div><b>Amara, 21</b><br><small>Lagos</small></div>
-<div class="card" onclick="openChat('Tunde, 25')"><div style="font-size:50px">👦</div><b>Tunde, 25</b><br><small>Near you</small></div>
-</div>
-<button class="btn" style="margin-top:15px" onclick="openChat('Secret Crush')">+ SEND INVISIBLE MESSAGE 👻</button>
-</div>
-
-<div id="chat" class="box" style="padding-top:50px">
-<h1 id="chatName" style="font-size:22px"></h1>
-<textarea id="t" style="width:85%;height:90px;background:#111;border:1px solid #0f0;color:#0f0;padding:12px;border-radius:10px" placeholder="Type secret ghost message... it will vanish!"></textarea><br>
-<button class="btn" onclick="g()">SEND INVISIBLE 👻</button>
-<div id="result" style="margin-top:15px;display:none;background:#111;padding:10px;border-radius:10px;word-break:break-all"></div>
-<span class="create" onclick="s('home')">Back to profiles</span>
-</div>
-
-<script>
-function s(id){['welcome','loginBox','createBox','home','chat'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display=id==='welcome'?'flex':'block';if(id==='welcome'){document.getElementById(id).style.flexDirection='column';document.getElementById(id).style.height='100vh';document.getElementById(id).style.justifyContent='space-between';}}
-function openChat(name){s('chat');document.getElementById('chatName').innerText=name;}
-function g(){
-let x=document.getElementById('t').value;if(!x)return alert('Type secret message');
-let c=btoa(unescape(encodeURIComponent(x)));
-let l=location.origin+location.pathname+'#'+c;
-let r=document.getElementById('result');r.style.display='block';
-r.innerHTML='<p>Ghost link ready! Send to '+document.getElementById('chatName').innerText+':</p><input id="li" style="width:90%;padding:10px;border-radius:5px" value="'+l+'"><br><button onclick="copy()" style="margin-top:10px;padding:10px;background:#0f0;border:none;border-radius:5px;font-weight:bold">COPY LINK</button><p style="font-size:11px;color:#888">Message vanishes after reading!</p>';
-}
-function copy(){let i=document.getElementById('li');i.select();document.execCommand('copy');alert('Ghost link copied! 👻');}
-if(location.hash.length>1){
-['welcome','loginBox','createBox','home'].forEach(x=>document.getElementById(x).style.display='none');
-document.getElementById('chat').style.display='block';
-let m=decodeURIComponent(escape(atob(location.hash.slice(1))));
-document.getElementById('chatName').innerText='👻 Secret Ghost Message';
-document.getElementById('t').style.display='none';
-let r=document.getElementById('result');r.style.display='block';
-r.innerHTML='<div style="font-size:22px;padding:20px;border:1px solid #0f0;border-radius:10px">'+m+'</div><p style="font-size:12px;color:#888">Vanishes in 5 sec...</p>';
-setTimeout(()=>{r.innerHTML='👻 VANISHED FOREVER';history.replaceState(null,'',location.pathname)},5000);
-}
-</script>
-</body>
-</html>
-<input placeholder="Username">
-<input placeholder="Email">
-<input type="password" placeholder="Password">
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GHOST Dating</title>
-<style>
-body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;text-align:center}
-.top{padding:30px 0 10px}
-h1{color:#7CFF6B;font-size:38px;font-weight:900;text-shadow:0 0 20px #0f0;margin:0}
-.boy{height:45vh;display:flex;align-items:center;justify-content:center;font-size:90px;filter:drop-shadow(0 0 20px #0f0)}
-.btn{background:#7CFF6B;color:#000;border:none;width:85%;padding:16px;border-radius:30px;font-weight:900;font-size:18px;cursor:pointer;margin:8px}
-.create{color:#aaa;font-size:14px;text-decoration:underline;cursor:pointer;display:block;margin-top:10px}
-.box{padding:20px}
-input{width:85%;padding:13px;border-radius:10px;border:1px solid #0f0;background:#111;color:#0f0;margin:6px}
-.profiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#111;border:1px solid #222;border-radius:15px;padding:10px;cursor:pointer}
-.card b{color:#7CFF6B}
-.chatBox{padding:20px}
-.msg{background:#111;padding:10px;border-radius:10px;margin:8px;text-align:left}
-.me{background:#0f2;color:#000;text-align:right}
-#welcome,#loginBox,#createBox,#home,#chat{display:none}
-#welcome{display:flex;flex-direction:column;height:100vh;justify-content:space-between}
-</style>
-</head>
-<body>
-
-<div id="welcome">
-<div class="top"><h1>WELCOME TO<br>GHOST</h1><p style="color:#666;font-size:12px">Find your ghost...</p></div>
-<div class="boy">👦👻</div>
-<div class="box"><button class="btn" onclick="s('loginBox')">LOGIN</button><span class="create" onclick="s('createBox')">Create a new account</span></div>
-</div>
-
-<div id="loginBox" class="box" style="padding-top:80px">
-<h1>LOGIN</h1>
-<input id="loginPhone" placeholder="Phone Number">
-<input id="loginPass" type="password" placeholder="Password">
-<button class="btn" onclick="doLogin()">ENTER GHOST</button>
-<span class="create" onclick="s('welcome')">Back</span>
-</div>
-
-<div id="createBox" class="box" style="padding-top:60px">
-<h1 style="font-size:28px">CREATE ACCOUNT</h1>
-<input id="regUser" placeholder="Username">
-<input id="regPhone" placeholder="Phone Number">
-<input id="regEmail" placeholder="Email">
-<input id="regPass" type="password" placeholder="Password">
-<button class="btn" onclick="doCreate()">CREATE & ENTER</button>
-<span class="create" onclick="s('welcome')">Already have account? Login</span>
-</div>
-
-<div id="home">
-<h1 style="font-size:26px;padding:15px">👻 GHOST DATING</h1>
-<div class="profiles">
-<div class="card" onclick="openChat('Sophia')"><div style="font-size:50px">👩‍🦰</div><b>Sophia, 22</b><br><small>Online - Lagos</small><br><button class="btn" style="padding:6px;font-size:12px;margin-top:6px">Like ❤️</button></div>
-<div class="card" onclick="openChat('David')"><div style="font-size:50px">👨‍🦱</div><b>David, 24</b><br><small>Near you</small><br><button class="btn" style="padding:6px;font-size:12px;margin-top:6px">Like ❤️</button></div>
-<div class="card" onclick="openChat('Amara')"><div style="font-size:50px">👩🏾</div><b>Amara, 21</b><br><small>Lagos</small><br><button class="btn" style="padding:6px;font-size:12px;margin-top:6px">Like ❤️</button></div>
-<div class="card" onclick="openChat('Tunde')"><div style="font-size:50px">👦</div><b>Tunde, 25</b><br><small>Ghost mode</small><br><button class="btn" style="padding:6px;font-size:12px;margin-top:6px">Like ❤️</button></div>
-</div>
-</div>
-
-<div id="chat" class="chatBox">
-<h1 id="chatName" style="font-size:22px"></h1>
-<div id="msgs">
-<div class="msg">Hey! How you dey? 👋</div>
-<div class="msg me">I dey fine! You ghost? 👻</div>
-</div>
-<input id="txt" placeholder="Type message..." style="width:70%"><button class="btn" style="width:20%;padding:13px" onclick="send()">Send</button>
-<br><span class="create" onclick="s('home')">Back to profiles</span>
-</div>
-
-<script>
-function s(id){['welcome','loginBox','createBox','home','chat'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display=id==='welcome'?'flex':'block';if(id==='welcome'){document.getElementById(id).style.flexDirection='column';document.getElementById(id).style.height='100vh';document.getElementById(id).style.justifyContent='space-between';}}
-
-function doCreate(){
-let u=document.getElementById('regUser').value;
-let p=document.getElementById('regPhone').value;
-let e=document.getElementById('regEmail').value;
-let pw=document.getElementById('regPass').value;
-if(!u||!p||!e||!pw){alert('Fill all fields! Username, Phone, Email, Password needed');return;}
-let users=JSON.parse(localStorage.getItem('ghost_users')||'[]');
-users.push({user:u,phone:p,email:e,pass:pw});
-localStorage.setItem('ghost_users',JSON.stringify(users));
-alert('Account created for '+u+'! Now login with phone number');
-s('loginBox');
-}
-
-function doLogin(){
-let ph=document.getElementById('loginPhone').value;
-let pw=document.getElementById('loginPass').value;
-if(!ph||!pw){alert('Enter Phone and Password');return;}
-let users=JSON.parse(localStorage.getItem('ghost_users')||'[]');
-let found=users.find(x=>x.phone===ph && x.pass===pw);
-if(!found){alert('No account found! Phone or password wrong. Please create account first!');s('createBox');return;}
-alert('Welcome back '+found.user+'!');
-s('home');
-}
-
-function openChat(name){s('chat');document.getElementById('chatName').innerText=name;}
-function send(){let t=document.getElementById('txt');if(!t.value)return;let m=document.createElement('div');m.className='msg me';m.innerText=t.value;document.getElementById('msgs').appendChild(m);t.value='';}
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GHOST</title>
 <style>
 body{background:#000;color:#fff;font-family:Arial;text-align:center;margin:0;padding:20px}
@@ -234,4 +48,58 @@ button{background:#7CFF6B;color:#000;padding:12px 20px;border:none;border-radius
 </div>
 
 <div id="profileSetup" class="hidden">
-<h2 class
+<h2 class="green">Setup Profile</h2>
+<div class="card">
+<input type="file" id="pic" accept="image/*">
+<input id="bio" placeholder="Add Bio">
+<button onclick="show('discover')">Add Friends / Continue</button>
+</div>
+</div>
+
+<div id="login" class="hidden">
+<h2 class="green">Login</h2>
+<div class="card">
+<input id="loginPhone" placeholder="Phone number OR Email">
+<input id="loginPass" type="password" placeholder="Password">
+<button onclick="doLogin()">Login</button>
+<p onclick="show('signup')" class="green">Create new account</p>
+</div>
+</div>
+
+<div id="discover" class="hidden">
+<h2 class="green">Discover People</h2>
+<div class="card profile">
+<h3>Mia, 24</h3>
+<p>Love music ❤️</p>
+<button>❤️ Like</button> <button>👻 Ghost</button>
+</div>
+<div class="card profile">
+<h3>Leo, 26</h3>
+<p>Gym & Travel</p>
+<button>❤️ Like</button> <button>👻 Ghost</button>
+</div>
+<button onclick="show('welcome')">Logout</button>
+</div>
+
+<script>
+function show(id){
+document.querySelectorAll('body > div').forEach(d=>d.classList.add('hidden'));
+document.getElementById(id).classList.remove('hidden');
+}
+function sendCode(){
+if(!fn.value||!ln.value||!phone.value||!pass.value){alert('Fill all fields');return}
+localStorage.setItem('user',JSON.stringify({phone:phone.value,pass:pass.value}));
+document.getElementById('to').innerText=phone.value;
+show('code');
+}
+function verify(){
+if(codeInput.value=='123456'){show('profileSetup');}else{alert('Wrong code. Use 123456 for test');}
+}
+function doLogin(){
+let u=JSON.parse(localStorage.getItem('user')||'{}');
+if(loginPhone.value==u.phone && loginPass.value==u.pass){show('discover');}
+else{alert('No account found. Please create account first!');show('signup');}
+}
+</script>
+</body>
+</html>
